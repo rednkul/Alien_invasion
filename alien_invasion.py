@@ -189,6 +189,8 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+
+
     def _check_aliens_bottom(self):
         """Проверяет, достиг ли пришельцы до нижнего края экрана"""
         screen_rect = self.screen.get_rect()
