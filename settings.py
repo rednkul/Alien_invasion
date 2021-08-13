@@ -10,7 +10,7 @@ class Settings():
 
         # Настройки корабля бля
         #self.ship_speed = 2
-        self.ship_limit = 3
+        self.ship_limit = 1
 
         # Параметры снаряда
         #self.bullet_speed = 10
@@ -35,7 +35,7 @@ class Settings():
         """Инициализирует настройки, изменяющиеся в ходе игры."""
         self.ship_speed = 2
         self.bullet_speed = 10
-        self.alien_speed = 1.0
+        self.alien_speed = 1
 
         # fleet_direction = 1 - движение вправо; -1 - влево
         self.fleet_direction = 1
@@ -45,5 +45,14 @@ class Settings():
         self.ship_speed *= self.speed_up_scale
         self.bullet_speed *= self.speed_up_scale
         self.alien_speed *= self.speed_up_scale
+
+    def get_hard(self):
+        self.alien_speed *= 2
+
+    def get_light(self):
+        self.ship_speed *= 2
+        self.bullet_speed *= 2
+        self.alien_speed *= 0.8
+
 
 

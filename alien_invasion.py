@@ -40,8 +40,11 @@ class AlienInvasion:
 
         self.stars = pygame.sprite.Group()
         self._create_stars()
-
+        # Создание кнопок
         self.play_button = Button(self, "Play")
+        self.hard_button = Button(self, "Hard")
+        self.medium_button = Button(self, "Medium")
+        self.light_button = Button(self, "Light")
 
     def run_game(self):
 
@@ -53,7 +56,8 @@ class AlienInvasion:
                 self._update_bullets()
                 self.ship.update()
                 self._update_aliens()
-
+            else:
+                pygame.mouse.set_visible(True)
             self._update_screen()
 
     def _chek_events(self):
@@ -67,13 +71,40 @@ class AlienInvasion:
                 self._chek_keyup_events(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
+
+                self._check_hard_button(mouse_pos)
+                self._check_medium_button(mouse_pos)
+                self._check_light_button(mouse_pos)
                 self._check_play_button(mouse_pos)
+
 
     def _check_play_button(self, mouse_pos):
         """Запускает новую игру при наатии"""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
-        if button_clicked and not self.stats.game_active:
+        if button_clicked and not self.stats.game_active and self.stats.difficult_choosen:
             self._start_game()
+
+    def _check_hard_button(self, mouse_pos):
+        """Запускает новую игру при наатии"""
+        button_clicked = self.hard_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.difficult_choosen:
+            self.stats.difficult_choosen = True
+            self.settings.get_hard()
+
+    def _check_medium_button(self, mouse_pos):
+        """Запускает новую игру при наатии"""
+        button_clicked = self.medium_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.difficult_choosen:
+            self.stats.difficult_choosen = True
+
+    def _check_light_button(self, mouse_pos):
+        """Запускает новую игру при наатии"""
+        button_clicked = self.light_button.rect.collidepoint(mouse_pos)
+        if button_clicked and not self.stats.difficult_choosen:
+            self.stats.difficult_choosen = True
+            self.settings.get_light()
+
+
 
     def _start_game(self):
 
@@ -92,7 +123,7 @@ class AlienInvasion:
         # Сокрытие указателя мыши
         pygame.mouse.set_visible(False)
 
-        self.settings.initialize_dynamic_settings()
+        #self.settings.initialize_dynamic_settings()
 
     def _chek_keydown_events(self, event):
         """Реагирует на нажатие клавиш"""
@@ -107,7 +138,7 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
-        elif event.key == pygame.K_p and not self.stats.game_active:
+        elif event.key == pygame.K_p and not self.stats.game_active and self.stats.difficult_choosen:
             self._start_game()
 
     def _chek_keyup_events(self, event):
@@ -167,9 +198,14 @@ class AlienInvasion:
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
+        if not self.stats.difficult_choosen:
+            self.hard_button.draw_button()
+            self.medium_button.draw_button()
+            self.light_button.draw_button()
         # Кнопка Play отображается только если игра не активна
-        if not self.stats.game_active:
+        if not self.stats.game_active and self.stats.difficult_choosen:
             self.play_button.draw_button()
+
 
         # Отображение последнего прорисованного экрана.
         pygame.display.flip()
@@ -192,6 +228,8 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            self.stats.difficult_choosen = False
+            self.settings.initialize_dynamic_settings()
 
 
     def _check_aliens_bottom(self):
