@@ -181,8 +181,9 @@ class AlienInvasion:
             self.settings.increase_speed()
 
         if collisions:
-            self.stats.score += int(self.settings.alien_points)
-            self.sb.prep_score()
+            for aliens in collisions.values():
+                self.stats.score += int(self.settings.alien_points * len(aliens))
+                self.sb.prep_score()
 
     def _update_aliens(self):
         """Обновляет позиции всех пришельцев во флоте"""

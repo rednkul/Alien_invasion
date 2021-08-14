@@ -9,7 +9,7 @@ class Button():
         # Назначение размеров и свойств кнопок
         self.width, self.height = 200, 50
 
-        self.text_color = (255, 255, 255)
+        self.text_color = (0, 0, 0)
         self.font = pygame.font.SysFont(None, 48)
 
         # Построение объекта rect кнопки и выравнивание по центру экрана
@@ -54,7 +54,7 @@ class Button():
         self.msg_image = self.font.render(self.msg, True, self.text_color,
                                           self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
-        self.rect.center = (680, 650)
+        self.rect.center = (self.screen_rect.centerx - 240, self.screen_rect.centery + 80)
         self.msg_image_rect.center = self.rect.center
 
 
@@ -63,13 +63,13 @@ class Button():
         self.msg_image = self.font.render(self.msg, True, self.text_color,
                                           self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
-        self.rect.center = (960, 650)
+        self.rect.center = (self.screen_rect.centerx, self.screen_rect.centery + 80)
         self.msg_image_rect.center = self.rect.center
 
     def _prep_light_button(self):
-        self.button_color = (0, 255, 253)
+        self.button_color = (254, 255, 1)
         self.msg_image = self.font.render(self.msg, True, self.text_color,
                                           self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()
-        self.rect.center = (1240, 650)
+        self.rect.center = (self.screen_rect.centerx + 240, self.screen_rect.centery + 80)
         self.msg_image_rect.center = self.rect.center

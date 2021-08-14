@@ -14,7 +14,7 @@ class Settings():
 
         # Параметры снаряда
         #self.bullet_speed = 10
-        self.bullet_width = 3
+        self.bullet_width = 300
         self.bullet_height = 15
         self.bullet_color = (229, 81, 55)
 
@@ -38,7 +38,7 @@ class Settings():
         """Инициализирует настройки, изменяющиеся в ходе игры."""
         self.ship_speed = 3
         self.bullet_speed = 10
-        self.alien_speed = 1
+        self.alien_speed = 0.5
 
         # fleet_direction = 1 - движение вправо; -1 - влево
         self.fleet_direction = 1
