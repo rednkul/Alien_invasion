@@ -7,7 +7,10 @@ class GameStats():
 
         # Игра запускается в неактивном состоянии
         self.game_active = False
+        self.difficult_choosen = False
 
     def reset_stats(self):
         """Инициализирует статистику, изменяющуюся в ходе игры"""
         self.ships_left = self.settings.ship_limit
+        self.score = 0
+
