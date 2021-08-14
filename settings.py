@@ -31,9 +31,12 @@ class Settings():
         self.speed_up_scale = 1.1
         self.initialize_dynamic_settings()
 
+        # Подсчет очков
+        self.alien_points = 10
+
     def initialize_dynamic_settings(self):
         """Инициализирует настройки, изменяющиеся в ходе игры."""
-        self.ship_speed = 2
+        self.ship_speed = 3
         self.bullet_speed = 10
         self.alien_speed = 1
 
