@@ -184,6 +184,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += int(self.settings.alien_points * len(aliens))
                 self.sb.prep_score()
+                #self.sb.check_high_score()
 
     def _update_aliens(self):
         """Обновляет позиции всех пришельцев во флоте"""
@@ -241,6 +242,7 @@ class AlienInvasion:
             self.stats.game_active = False
             self.stats.difficult_choosen = False
             self.settings.initialize_dynamic_settings()
+            self.sb.check_high_score()
 
 
     def _check_aliens_bottom(self):
