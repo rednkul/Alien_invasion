@@ -1,11 +1,12 @@
 import pygame
+from pygame.sprite import Sprite
 
-
-class Ship():
+class Ship(Sprite):
     """Класс управления кораблем."""
 
-    def __init__(self, ai_game):
+    def __init__(self, ai_game, lives = False):
         """Инициализирует корабль и задает его начальную позицию."""
+        super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
@@ -22,6 +23,11 @@ class Ship():
         # Флаг перемещения
         self.moving_right = False
         self.moving_left = False
+
+        # Определяет, является ли экземпляр обозначением оставшихся кораблей или игровым
+        self.lives = lives
+        # Уменьшает изображение, если экземпляр - иконка оставшейся жизни
+        self._min_size()
 
     def update(self):
         """Обновляет позицию корабля с учетом флага."""
@@ -41,3 +47,12 @@ class Ship():
         """Размещает корабль в центре нижней стороны"""
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)
+
+    def _min_size(self):
+        """Уменьшает изображение корабля, если экземпляр используется"""
+        """для обозначения оставшихся жизней."""
+        if self.lives == True:
+            self.min_image = pygame.transform.scale(self.image,
+                            (self.rect.width // 4, self.rect.height // 4))
+            self.image = self.min_image
+            self.rect = self.image.get_rect()
