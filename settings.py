@@ -42,10 +42,11 @@ class Settings():
         """Инициализирует настройки, изменяющиеся в ходе игры."""
         self.ship_speed = 3
         self.bullet_speed = 10
-        self.alien_speed = 4
+        self.alien_speed = 0.5
 
         # fleet_direction = 1 - движение вправо; -1 - влево
         self.fleet_direction = 1
+        self.alien_points = 10
 
     def increase_speed(self):
         """Увеличивает настройки скорости и стоимость пришельцев."""
